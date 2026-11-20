@@ -1,0 +1,8 @@
+.git
+.venv
+data
+data.tar
+.dvc
+*.pt
+mlruns
+mlflow.db

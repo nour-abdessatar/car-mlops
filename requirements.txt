@@ -1,9 +1,10 @@
 torch
 torchvision
-timm
-mlflow
-scikit-learn
+timm==1.0.31
+numpy==2.4.6
+pillow==11.3.0
 scipy
-numpy
+scikit-learn
 pyyaml
+mlflow==3.18.0
 dvc
