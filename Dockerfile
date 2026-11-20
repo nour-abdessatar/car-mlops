@@ -1,8 +1,13 @@
-FROM python:3.13-slim
-WORKDIR /code
-RUN pip install --no-cache-dir torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cpu
+FROM python:3.11-slim
+WORKDIR /app
+
 COPY requirements-serve.txt .
 RUN pip install --no-cache-dir -r requirements-serve.txt
+
 COPY app/ app/
 COPY classes.json .
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# ~110 MB model, hosted as a GitHub Release asset (too big for a normal git file)
+ADD https://github.com/nour-abdessatar/car-mlops/releases/download/v1/model.onnx model.onnx
+
+ENV PORT=8000
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT}"]

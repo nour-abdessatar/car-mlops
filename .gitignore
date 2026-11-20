@@ -1,2 +1,9 @@
 data/
 /data.tar
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+model.onnx
+*.onnx
+mlruns/

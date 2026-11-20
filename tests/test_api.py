@@ -1,22 +1,23 @@
-import io, json
+import io
+import json
 
-import torch
-import torch.nn as nn
+import numpy as np
 from fastapi.testclient import TestClient
 from PIL import Image
 
 import app.main as main
 
 
-class Dummy(nn.Module):
-    def forward(self, x):
-        out = torch.zeros(x.shape[0], 196)
+class DummySession:
+    def run(self, _, feed):
+        n = feed["input"].shape[0]
+        out = np.zeros((n, 196), dtype=np.float32)
         out[:, 0] = 5.0
-        return out
+        return [out]
 
 
 def test_health_and_predict(monkeypatch):
-    monkeypatch.setattr(main.mlflow.pytorch, "load_model", lambda *a, **k: Dummy())
+    monkeypatch.setattr(main, "load_session", lambda *a, **k: DummySession())
     with TestClient(main.app) as client:
         assert client.get("/health").status_code == 200
 
