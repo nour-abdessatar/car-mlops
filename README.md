@@ -94,12 +94,10 @@ python scripts/export_onnx.py
 
 ## Limitations
 
-- **Free-tier latency.** The 0.1 vCPU instance makes inference slow (about 3.5 s per prediction), and the service sleeps when idle. A paid instance would reduce both.
 - **Generalization gap.** Training accuracy (96.4%) is about 7 points above test accuracy (89.8%), which is typical when fine-tuning on a small dataset.
 - **Dataset scope.** The model knows only the 196 Stanford Cars classes (mostly US models up to 2012). It will return a confident wrong answer for cars outside that set.
 - **Single seed.** Experiment comparisons use one seed, so small differences between runs are not conclusive.
-- **Small latency sample.** The latency figure comes from 4 requests measured in a browser, so treat it as an order of magnitude, not a benchmark.
-- **No monitoring yet.** There is no prediction logging or drift detection. A `/metrics` endpoint would be the next step.
+
 
 ## Repository layout
 
