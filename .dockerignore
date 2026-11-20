@@ -1,8 +1,24 @@
-.git
+# environments and VCS
 .venv
+.git
+.github
+__pycache__
+*.pyc
+.pytest_cache
+
+# data and pipeline outputs (not needed to serve the API)
 data
 data.tar
 .dvc
-*.pt
+models
+artifacts
+metrics
 mlruns
 mlflow.db
+*.pt
+
+# not needed in the image (the model is downloaded in the Dockerfile)
+*.onnx
+tests
+src
+scripts
